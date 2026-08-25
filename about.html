@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Ahmed Elbialy - SOC Analyst, Full Stack Developer, and Cybersecurity Professional specializing in threat detection and digital forensics.">
+    <meta name="keywords" content="Ahmed Elbialy, SOC Analyst, Cybersecurity, Digital Forensics, About">
+    <meta property="og:title" content="About Ahmed Elbialy | Cybersecurity Professional">
+    <meta property="og:description" content="Learn about Ahmed Elbialy's journey in cybersecurity, SOC operations, and digital forensics.">
+    <meta property="og:type" content="profile">
+    
+    <title>About | Ahmed Elbialy - Cybersecurity Professional</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#0a0a0f',
+                            darker: '#050508',
+                            primary: '#00f0ff',
+                            secondary: '#7000ff',
+                            accent: '#ff003c',
+                            success: '#00ff88',
+                            surface: '#13131f',
+                            warning: '#ffb800',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'scan': 'scan 4s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 4px; }
+        
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .glass {
+            background: rgba(19, 19, 31, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #00f0ff, #7000ff);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .skill-bar {
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: scan 2s infinite;
+        }
+        
+        .timeline-line {
+            background: linear-gradient(to bottom, #00f0ff, #7000ff);
+        }
+        
+        .timeline-dot {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+        
+        .image-frame {
+            position: relative;
+        }
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, #00f0ff, #7000ff, #00f0ff);
+            border-radius: 1rem;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .image-frame:hover::before {
+            opacity: 1;
+        }
+        
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0f;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-cyber-dark text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="text-cyber-primary font-mono text-xl animate-pulse">
+            <i class="fas fa-shield-alt mr-2"></i>Loading Profile...
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0 opacity-50"></div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold text-lg group-hover:shadow-lg group-hover:shadow-cyber-primary/50 transition-all">
+                        AE
+                    </div>
+                    <span class="text-white font-bold text-xl tracking-tight group-hover:text-cyber-primary transition-colors">
+                        Ahmed<span class="text-cyber-primary">.Elbialy</span>
+                    </span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-sm font-medium text-cyber-primary">About</a>
+                    <a href="certificates.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Projects</a>
+                    <a href="researches.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Contact</a>
+                    <a href="cv.html" class="px-4 py-2 rounded-full bg-gradient-to-r from-cyber-primary to-cyber-secondary text-cyber-dark font-bold text-sm hover:shadow-lg hover:shadow-cyber-primary/50 transition-all transform hover:scale-105">
+                        CV
+                    </a>
+                </nav>
+
+                <button class="md:hidden text-white text-2xl" id="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="hidden md:hidden mt-4 pb-4 border-t border-cyber-primary/20 pt-4" id="mobile-menu">
+                <div class="flex flex-col gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Home</a>
+                    <a href="about.html" class="text-cyber-primary font-medium">About</a>
+                    <a href="certificates.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Projects</a>
+                    <a href="researches.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Contact</a>
+                    <a href="cv.html" class="text-cyber-primary font-medium">View CV</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24">
+        
+        <!-- Hero Section -->
+        <section class="min-h-[60vh] flex items-center relative overflow-hidden">
+            <div class="absolute top-20 right-10 w-72 h-72 bg-cyber-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-20 left-10 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+            <div class="container mx-auto px-6 py-20">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-surface border border-cyber-primary/30 mb-6">
+                        <i class="fas fa-user text-cyber-primary text-sm"></i>
+                        <span class="text-xs font-mono text-cyber-primary">PROFILE_ACCESS_GRANTED</span>
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                        About <span class="text-gradient">Me</span>
+                    </h1>
+
+                    <p class="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                        Translating complex cybersecurity challenges into practical, actionable solutions that empower organizations to succeed.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-20 relative" id="about-section">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Text Content -->
+                    <div class="order-2 lg:order-1 space-y-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center">
+                                <i class="fas fa-fingerprint text-cyber-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-white">Who I Am</h2>
+                                <p class="text-gray-500 font-mono text-xs">IDENTITY_VERIFIED</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p class="text-lg">
+                                Ahmed Elbialy is a <span class="text-cyber-primary font-semibold">cybersecurity professional</span>, SOC analyst, and aspiring digital forensics expert, specializing in SOC operations, incident response, and secure programming.
+                            </p>
+                            
+                            <p>
+                                I focus on translating complex cybersecurity challenges into practical, actionable solutions that empower organizations to succeed—without unnecessary technical jargon or confusion.
+                            </p>
+
+                            <p>
+                                With deep expertise in <span class="text-cyber-secondary font-semibold">threat detection</span>, <span class="text-cyber-secondary font-semibold">forensic analysis</span>, and <span class="text-cyber-secondary font-semibold">security research</span>, I guide organizations,teams through structured, evidence-based approaches to identify vulnerabilities, respond to incidents, and mitigate risks.
+                            </p>
+
+                            <div class="glass rounded-xl p-6 border-l-4 border-cyber-primary">
+                                <p class="text-white font-medium italic">
+                                    "My methodical, hands-on approach produces measurable outcomes, from improved security posture and rapid threat resolution to robust documentation and compliance adherence."
+                                </p>
+                            </div>
+
+                            <p>
+                                I'm committed to building a professional community centered on <span class="text-cyber-success font-semibold">real-world cybersecurity solutions</span>. No hype, no overcomplication—just practical, research-driven methods that deliver tangible improvements in digital security and operational resilience.
+                            </p>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-3 gap-4 pt-6">
+                            <div class="text-center p-4 rounded-lg bg-cyber-surface/50 border border-cyber-primary/20">
+                                <div class="text-2xl font-bold text-cyber-primary">5+</div>
+                                <div class="text-xs text-gray-500 font-mono">YEARS_STUDY</div>
+                            </div>
+                            <div class="text-center p-4 rounded-lg bg-cyber-surface/50 border border-cyber-secondary/20">
+                                <div class="text-2xl font-bold text-cyber-secondary">50+</div>
+                                <div class="text-xs text-gray-500 font-mono">THREATS_ANALYZED</div>
+                            </div>
+                            <div class="text-center p-4 rounded-lg bg-cyber-surface/50 border border-cyber-success/20">
+                                <div class="text-2xl font-bold text-cyber-success">100%</div>
+                                <div class="text-xs text-gray-500 font-mono">COMMITMENT</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="order-1 lg:order-2 relative">
+                        <div class="relative w-full max-w-md mx-auto">
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyber-primary to-cyber-secondary rounded-2xl blur-xl opacity-30 animate-pulse-slow"></div>
+                            <div class="image-frame relative rounded-2xl overflow-hidden border-2 border-cyber-surface">
+                                <img src="IMGS/IMG_1.jpeg" alt="Ahmed Elbialy" class="w-full h-auto object-cover">
+                                
+                                <!-- Overlay Info -->
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-cyber-dark to-transparent p-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-3 h-3 bg-cyber-success rounded-full animate-pulse"></div>
+                                        <span class="text-white font-mono text-sm">STATUS: ACTIVE</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge -->
+                            <div class="absolute -top-4 -right-4 bg-cyber-surface border border-cyber-primary/30 px-4 py-2 rounded-lg shadow-xl animate-float">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-shield-alt text-cyber-primary"></i>
+                                    <span class="text-xs font-mono text-cyber-primary">SOC L1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Background Journey -->
+        <section class="py-20 relative bg-cyber-surface/30">
+            <div class="container mx-auto px-6">
+                <div class="flex items-center gap-3 mb-12 justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-surface border border-cyber-secondary/30 flex items-center justify-center">
+                        <i class="fas fa-road text-cyber-secondary text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">My Journey</h2>
+                        <p class="text-gray-500 font-mono text-sm">CAREER_TRAJECTORY_ANALYSIS</p>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                    <!-- Image -->
+                    <div class="relative order-2 lg:order-1">
+                        <div class="relative w-full max-w-md mx-auto">
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyber-secondary to-cyber-accent rounded-2xl blur-xl opacity-30 animate-pulse-slow" style="animation-delay: 1s;"></div>
+                            <div class="image-frame relative rounded-2xl overflow-hidden border-2 border-cyber-surface rotate-2 hover:rotate-0 transition-transform duration-500">
+                                <img src="IMGS/IMG_8467.jpg" alt="Ahmed Elbialy Working" class="w-full h-auto object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="order-1 lg:order-2 space-y-8">
+                        
+                        <!-- Timeline Item 1 -->
+                        <div class="relative pl-8 border-l-2 border-cyber-primary/30 hover:border-cyber-primary transition-colors group">
+                            <div class="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-cyber-dark border-2 border-cyber-primary timeline-dot group-hover:scale-125 transition-transform"></div>
+                            <div class="mb-2">
+                                <span class="text-cyber-primary font-mono text-xs">PHASE_01</span>
+                                <h3 class="text-xl font-bold text-white mt-1">Cybersecurity Foundation</h3>
+                                <p class="text-cyber-secondary text-sm font-medium">Analytical Mind</p>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                After pursuing my studies in cybersecurity, I realized that protecting systems isn't just about responding to threats. It's about understanding them, anticipating them, and building defenses that last.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative pl-8 border-l-2 border-cyber-secondary/30 hover:border-cyber-secondary transition-colors group">
+                            <div class="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-cyber-dark border-2 border-cyber-secondary timeline-dot group-hover:scale-125 transition-transform"></div>
+                            <div class="mb-2">
+                                <span class="text-cyber-secondary font-mono text-xs">PHASE_02</span>
+                                <h3 class="text-xl font-bold text-white mt-1">SOC & Digital Forensics</h3>
+                                <p class="text-cyber-accent text-sm font-medium">Driven by Results</p>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                I immersed myself in SOC operations, incident response, digital forensics, and secure programming, mastering evidence-driven, data-based methods to detect, analyze, and mitigate cyber threats.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="relative pl-8 border-l-2 border-cyber-success/30 hover:border-cyber-success transition-colors group">
+                            <div class="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-cyber-dark border-2 border-cyber-success timeline-dot group-hover:scale-125 transition-transform"></div>
+                            <div class="mb-2">
+                                <span class="text-cyber-success font-mono text-xs">PHASE_03</span>
+                                <h3 class="text-xl font-bold text-white mt-1">Tested Methods</h3>
+                                <p class="text-cyber-warning text-sm font-medium">Tangible Security</p>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                My work isn't just theoretical—it's hands-on, tested, and results-driven. From identifying sophisticated attacks to implementing robust security measures, every project produces measurable improvements.
+                            </p>
+                        </div>
+
+                         <!-- Timeline Item 3 -->
+                        <div class="relative pl-8 border-l-2 border-cyber-success/30 hover:border-cyber-success transition-colors group">
+                            <div class="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-cyber-dark border-2 border-cyber-success timeline-dot group-hover:scale-125 transition-transform"></div>
+                            <div class="mb-2">
+                                <span class="text-cyber-success font-mono text-xs">PHASE_04</span>
+                                <h3 class="text-xl font-bold text-white mt-1">Research Contributions</h3>
+                                <p class="text-cyber-warning text-sm font-medium">Research & Development</p>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Engaging in cybersecurity research, I contribute to the broader knowledge base, sharing insights and findings that help organizations stay ahead of emerging threats and vulnerabilities. Beyond leadership, I actively participate in the cybersecurity community, fostering collaboration and knowledge exchange to strengthen collective defenses.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Matrix -->
+        <section class="py-20 relative">
+            <div class="container mx-auto px-6">
+                <div class="flex items-center gap-3 mb-12 justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center">
+                        <i class="fas fa-microchip text-cyber-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Core Competencies</h2>
+                        <p class="text-gray-500 font-mono text-sm">SKILL_MATRIX_ANALYSIS</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    
+                    <!-- Skill Card 1 -->
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyber-primary/10 flex items-center justify-center group-hover:bg-cyber-primary/20 transition-colors">
+                                <i class="fas fa-shield-virus text-cyber-primary"></i>
+                            </div>
+                            <h3 class="text-white font-bold">Threat Detection</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">SIEM Tools</span>
+                                <span class="text-cyber-primary">95%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-primary to-cyber-secondary rounded-full skill-bar" style="width: 0%" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Log Analysis</span>
+                                <span class="text-cyber-primary">90%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-primary to-cyber-secondary rounded-full skill-bar" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 2 -->
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyber-secondary/10 flex items-center justify-center group-hover:bg-cyber-secondary/20 transition-colors">
+                                <i class="fas fa-search text-cyber-secondary"></i>
+                            </div>
+                            <h3 class="text-white font-bold">Digital Forensics</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Evidence Analysis</span>
+                                <span class="text-cyber-secondary">88%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-secondary to-cyber-accent rounded-full skill-bar" style="width: 0%" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Chain of Custody</span>
+                                <span class="text-cyber-secondary">92%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-secondary to-cyber-accent rounded-full skill-bar" style="width: 0%" data-width="92%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 3 -->
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyber-success/10 flex items-center justify-center group-hover:bg-cyber-success/20 transition-colors">
+                                <i class="fas fa-code text-cyber-success"></i>
+                            </div>
+                            <h3 class="text-white font-bold">Secure Development</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Python/Scripting</span>
+                                <span class="text-cyber-success">90%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-success to-cyber-primary rounded-full skill-bar" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Web Security</span>
+                                <span class="text-cyber-success">85%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-success to-cyber-primary rounded-full skill-bar" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 4 -->
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyber-warning/10 flex items-center justify-center group-hover:bg-cyber-warning/20 transition-colors">
+                                <i class="fas fa-exclamation-triangle text-cyber-warning"></i>
+                            </div>
+                            <h3 class="text-white font-bold">Incident Response</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Containment</span>
+                                <span class="text-cyber-warning">93%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-warning to-cyber-accent rounded-full skill-bar" style="width: 0%" data-width="93%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Recovery</span>
+                                <span class="text-cyber-warning">89%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-warning to-cyber-accent rounded-full skill-bar" style="width: 0%" data-width="89%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 5 -->
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyber-accent/10 flex items-center justify-center group-hover:bg-cyber-accent/20 transition-colors">
+                                <i class="fas fa-brain text-cyber-accent"></i>
+                            </div>
+                            <h3 class="text-white font-bold">AI Integration</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Prompt Engineering</span>
+                                <span class="text-cyber-accent">87%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-accent to-cyber-secondary rounded-full skill-bar" style="width: 0%" data-width="87%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">ML for Security</span>
+                                <span class="text-cyber-accent">82%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyber-accent to-cyber-secondary rounded-full skill-bar" style="width: 0%" data-width="82%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 6 -->
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
+                                <i class="fas fa-users text-purple-400"></i>
+                            </div>
+                            <h3 class="text-white font-bold">Leadership</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Team Management</span>
+                                <span class="text-purple-400">91%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-purple-400 to-cyber-secondary rounded-full skill-bar" style="width: 0%" data-width="91%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Strategic Planning</span>
+                                <span class="text-purple-400">86%</span>
+                            </div>
+                            <div class="h-2 bg-cyber-surface rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-purple-400 to-cyber-secondary rounded-full skill-bar" style="width: 0%" data-width="86%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="py-20 relative bg-cyber-surface/30">
+            <div class="container mx-auto px-6 text-center max-w-4xl">
+                <div class="glass rounded-2xl p-8 md:p-12 border border-cyber-primary/20 relative overflow-hidden">
+                    <!-- Decorative Elements -->
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-primary via-cyber-secondary to-cyber-primary"></div>
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-cyber-primary/20 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-cyber-secondary/20 rounded-full blur-3xl"></div>
+
+                    <i class="fas fa-quote-left text-4xl text-cyber-primary/30 mb-6"></i>
+                    
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">
+                        My Philosophy
+                    </h3>
+                    
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        "Security is not a product, but a process. It's about building resilient systems that not only withstand attacks but learn and adapt from them. Every vulnerability is an opportunity to strengthen the fortress."
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-dark border border-cyber-primary/30">
+                            <i class="fas fa-check-circle text-cyber-primary text-sm"></i>
+                            <span class="text-sm text-gray-300">Evidence-Based</span>
+                        </div>
+                        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-dark border border-cyber-secondary/30">
+                            <i class="fas fa-check-circle text-cyber-secondary text-sm"></i>
+                            <span class="text-sm text-gray-300">Results-Driven</span>
+                        </div>
+                        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-dark border border-cyber-success/30">
+                            <i class="fas fa-check-circle text-cyber-success text-sm"></i>
+                            <span class="text-sm text-gray-300">Community-Focused</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-dark border border-cyber-secondary/30">
+                            <i class="fas fa-check-circle text-cyber-secondary text-sm"></i>
+                            <span class="text-sm text-gray-300">Researched & Approved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-cyber-primary/10 to-cyber-secondary/10"></div>
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Want to Know More?</h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                    Check out my detailed CV or get in touch to discuss how I can help secure your organization.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="cv.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-cyber-dark font-bold hover:bg-cyber-primary transition-colors">
+                        <i class="fas fa-file-alt"></i>
+                        View Full CV
+                    </a>
+                    <a href="contact.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white text-white font-bold hover:bg-white hover:text-cyber-dark transition-colors">
+                        <i class="fas fa-envelope"></i>
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-cyber-primary/20 bg-cyber-surface/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold">
+                            AE
+                        </div>
+                        <span class="text-white font-bold text-xl">Ahmed Elbialy</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md">
+                        SOC Analyst & Full Stack Developer dedicated to building secure, scalable, and intelligent systems.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Home</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Projects</a></li>
+                        <li><a href="certificates.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="https://www.linkedin.com/in/ahmed-elbialy-3b155a2b8/" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.facebook.com/Meedoo.XS3" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/ahmedisstory?s=21" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-cyber-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm font-mono">
+                    <span class="text-cyber-primary">&copy;</span> 2024 Ahmed Elbialy. All systems secure.
+                </p>
+                <p class="text-gray-600 text-xs font-mono">
+                    Last updated: <span id="last-updated"></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Remove loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate skill bars
+        const skillBars = document.querySelectorAll('.skill-bar');
+        
+        skillBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            
+            gsap.to(bar, {
+                scrollTrigger: {
+                    trigger: bar,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                width: width,
+                duration: 1.5,
+                ease: 'power3.out'
+            });
+        });
+
+        // Animate timeline items
+        gsap.utils.toArray('.timeline-dot').forEach((dot, i) => {
+            gsap.from(dot, {
+                scrollTrigger: {
+                    trigger: dot,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                scale: 0,
+                duration: 0.5,
+                delay: i * 0.2,
+                ease: 'back.out(1.7)'
+            });
+        });
+
+        // Animate sections
+        gsap.utils.toArray('.hover-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 30,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Particle Network (simplified for about page)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        const particleCount = 30;
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resize);
+        resize();
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.size = Math.random() * 2 + 1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            
+            draw() {
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        init();
+        animate();
+
+        // Last updated date
+        document.getElementById('last-updated').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                navbar.classList.add('shadow-lg', 'shadow-cyber-primary/10');
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-cyber-primary/10');
+            }
+        });
+    </script>
+</body>
+</html>

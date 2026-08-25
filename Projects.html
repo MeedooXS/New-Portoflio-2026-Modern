@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ahmed Elbialy's Portfolio Projects - Secure systems, AI applications, full-stack development, and assistive technology solutions.">
+    <meta name="keywords" content="Projects, Portfolio, Python, AI, Cybersecurity, Full Stack, Ahmed Elbialy">
+    <meta property="og:title" content="Projects | Ahmed Elbialy - Technical Portfolio">
+    <meta property="og:description" content="Explore innovative projects in cybersecurity, AI/ML, and full-stack development.">
+    
+    <title>Projects | Ahmed Elbialy - Technical Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#0a0a0f',
+                            darker: '#050508',
+                            primary: '#00f0ff',
+                            secondary: '#7000ff',
+                            accent: '#ff003c',
+                            success: '#00ff88',
+                            surface: '#13131f',
+                            warning: '#ffb800',
+                            gold: '#ffd700',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'typing': 'typing 3.5s steps(40, end)',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        typing: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 4px; }
+        
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .glass {
+            background: rgba(19, 19, 31, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #00f0ff, #7000ff);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(0, 240, 255, 0.2);
+        }
+        
+        .tech-tag {
+            transition: all 0.3s ease;
+        }
+        .tech-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px currentColor;
+        }
+        
+        .feature-list li {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .feature-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #00f0ff;
+        }
+        
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0f;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .code-window {
+            background: #1e1e2e;
+            border-radius: 12px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .code-header {
+            background: #313244;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .code-content {
+            padding: 20px;
+            color: #cdd6f4;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .code-keyword { color: #f38ba8; }
+        .code-function { color: #89b4fa; }
+        .code-string { color: #a6e3a1; }
+        .code-comment { color: #6c7086; }
+    </style>
+</head>
+<body class="bg-cyber-dark text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="text-cyber-primary font-mono text-xl animate-pulse">
+            <i class="fas fa-code mr-2"></i>Compiling Projects...
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0 opacity-50"></div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold text-lg group-hover:shadow-lg group-hover:shadow-cyber-primary/50 transition-all">
+                        AE
+                    </div>
+                    <span class="text-white font-bold text-xl tracking-tight group-hover:text-cyber-primary transition-colors">
+                        Ahmed<span class="text-cyber-primary">.Elbialy</span>
+                    </span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">About</a>
+                    <a href="certificates.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="nav-link text-sm font-medium text-cyber-primary">Projects</a>
+                    <a href="researches.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Contact</a>
+                    <a href="cv.html" class="px-4 py-2 rounded-full bg-gradient-to-r from-cyber-primary to-cyber-secondary text-cyber-dark font-bold text-sm hover:shadow-lg hover:shadow-cyber-primary/50 transition-all transform hover:scale-105">
+                        CV
+                    </a>
+                </nav>
+
+                <button class="md:hidden text-white text-2xl" id="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="hidden md:hidden mt-4 pb-4 border-t border-cyber-primary/20 pt-4" id="mobile-menu">
+                <div class="flex flex-col gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-400 hover:text-cyber-primary transition-colors">About</a>
+                    <a href="certificates.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="text-cyber-primary font-medium">Projects</a>
+                    <a href="researches.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Contact</a>
+                    <a href="cv.html" class="text-cyber-primary font-medium">View CV</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24">
+        
+        <!-- Hero Section -->
+        <section class="relative py-20 overflow-hidden">
+            <div class="absolute top-20 right-10 w-72 h-72 bg-cyber-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-20 left-10 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+            <div class="container mx-auto px-6 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-surface border border-cyber-primary/30 mb-6">
+                    <i class="fas fa-terminal text-cyber-primary text-sm"></i>
+                    <span class="text-xs font-mono text-cyber-primary">BUILD_SUCCESS</span>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                    Featured <span class="text-gradient">Projects</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12">
+                    A collection of <span class="text-cyber-primary">security-focused</span>, 
+                    <span class="text-cyber-secondary">AI-powered</span>, and 
+                    <span class="text-cyber-success">full-stack</span> applications 
+                    demonstrating practical problem-solving and technical expertise.
+                </p>
+
+                <!-- Project Stats -->
+                <div class="flex flex-wrap justify-center gap-8 mb-12">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-cyber-primary mb-1">5+</div>
+                        <div class="text-xs text-gray-500 font-mono">PROJECTS_COMPLETED</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-cyber-secondary mb-1">4</div>
+                        <div class="text-xs text-gray-500 font-mono">TECH_DOMAINS</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-cyber-success mb-1">100%</div>
+                        <div class="text-xs text-gray-500 font-mono">FUNCTIONAL_CODE</div>
+                    </div>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button class="filter-btn active px-6 py-2 rounded-full border border-cyber-primary/30 text-sm font-medium text-gray-300 hover:border-cyber-primary transition-all" data-filter="all">
+                        <i class="fas fa-layer-group mr-2"></i>All Projects
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-cyber-primary/30 text-sm font-medium text-gray-300 hover:border-cyber-primary transition-all" data-filter="security">
+                        <i class="fas fa-shield-alt mr-2"></i>Security
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-cyber-secondary/30 text-sm font-medium text-gray-300 hover:border-cyber-secondary transition-all" data-filter="ai">
+                        <i class="fas fa-brain mr-2"></i>AI/ML
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-cyber-success/30 text-sm font-medium text-gray-300 hover:border-cyber-success transition-all" data-filter="web">
+                        <i class="fas fa-globe mr-2"></i>Web Dev
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-cyber-warning/30 text-sm font-medium text-gray-300 hover:border-cyber-warning transition-all" data-filter="hardware">
+                        <i class="fas fa-microchip mr-2"></i>Hardware
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-cyber-warning/30 text-sm font-medium text-gray-300 hover:border-cyber-warning transition-all" data-filter="gaming">
+                        <i class="fas fa-gamepad mr-2"></i>Gaming
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="py-20 relative">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-8" id="projects-grid">
+
+                    <!-- Project 1: Password Manager -->
+                    <div class="project-card glass rounded-2xl overflow-hidden group" data-category="security">
+                        <div class="relative h-64 bg-gradient-to-br from-cyber-primary/20 to-cyber-secondary/20 flex items-center justify-center overflow-hidden">
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%2300f0ff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+                            <i class="fas fa-lock text-6xl text-cyber-primary opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute top-4 right-4">
+                                <span class="px-3 py-1 rounded-full bg-cyber-primary/20 text-cyber-primary text-xs font-bold border border-cyber-primary/30">
+                                    <i class="fas fa-shield-alt mr-1"></i>SECURITY
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-cyber-primary transition-colors">
+                                Secure Password Storage & Management System
+                            </h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">
+                                A robust password manager implementing military-grade encryption standards with an intuitive GUI interface.
+                            </p>
+                            
+                            <!-- Tech Stack -->
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs border border-yellow-500/30">Python</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-primary/10 text-cyber-primary text-xs border border-cyber-primary/30">Fernet</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-secondary/10 text-cyber-secondary text-xs border border-cyber-secondary/30">PBKDF2HMAC</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-success/10 text-cyber-success text-xs border border-cyber-success/30">Tkinter</span>
+                            </div>
+
+                            <!-- Features -->
+                            <ul class="feature-list space-y-2 text-sm text-gray-400 mb-6">
+                                <li>Military-grade Fernet encryption with PBKDF2HMAC key derivation</li>
+                                <li>Protected password vault with modern GUI interface</li>
+                                <li>Real-time password strength evaluation</li>
+                                <li>Secure credential workflow management</li>
+                            </ul>
+
+                            <div class="flex gap-4">
+                               <!-- <button class="flex-1 py-3 rounded-lg bg-cyber-primary/10 border border-cyber-primary/30 text-cyber-primary font-medium hover:bg-cyber-primary hover:text-cyber-dark transition-all flex items-center justify-center gap-2 group/btn">
+                                    <i class="fab fa-github"></i>
+                                    <span>View Code</span>
+                                    <i class="fas fa-arrow-right opacity-0 group-hover/btn:opacity-100 transition-opacity"></i>
+                                </button>
+                                <button class="px-4 py-3 rounded-lg border border-gray-700 text-gray-400 hover:border-cyber-primary hover:text-cyber-primary transition-all">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Restaurant Management -->
+                    <div class="project-card glass rounded-2xl overflow-hidden group" data-category="web">
+                        <div class="relative h-64 bg-gradient-to-br from-cyber-success/20 to-cyber-primary/20 flex items-center justify-center overflow-hidden">
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%2300ff88\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+                            <i class="fas fa-utensils text-6xl text-cyber-success opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute top-4 right-4">
+                                <span class="px-3 py-1 rounded-full bg-cyber-success/20 text-cyber-success text-xs font-bold border border-cyber-success/30">
+                                    <i class="fas fa-globe mr-1"></i>WEB
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-cyber-success transition-colors">
+                                Online Restaurant Management System
+                            </h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">
+                                Full-stack web application for restaurant operations including reservations, inventory, and role-based access control.
+                            </p>
+                            
+                            <!-- Tech Stack -->
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs border border-orange-500/30">HTML/CSS</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-yellow-400/10 text-yellow-400 text-xs border border-yellow-400/30">JavaScript</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-primary/10 text-cyber-primary text-xs border border-cyber-primary/30">Node.js</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-secondary/10 text-cyber-secondary text-xs border border-cyber-secondary/30">SQL</span>
+                            </div>
+
+                            <!-- Features -->
+                            <ul class="feature-list space-y-2 text-sm text-gray-400 mb-6">
+                                <li>Full-stack system for reservations, menus, and inventory</li>
+                                <li>Admin dashboards with role-based access control</li>
+                                <li>Secure authentication with hashed passwords</li>
+                                <li>Complete documentation (UML diagrams, Gantt charts)</li>
+                            </ul>
+
+                            <div class="flex gap-4">
+                               <!-- <button class="flex-1 py-3 rounded-lg bg-cyber-success/10 border border-cyber-success/30 text-cyber-success font-medium hover:bg-cyber-success hover:text-cyber-dark transition-all flex items-center justify-center gap-2 group/btn">
+                                    <i class="fab fa-github"></i>
+                                    <span>View Code</span>
+                                    <i class="fas fa-arrow-right opacity-0 group-hover/btn:opacity-100 transition-opacity"></i>
+                                </button>
+                                <button class="px-4 py-3 rounded-lg border border-gray-700 text-gray-400 hover:border-cyber-success hover:text-cyber-success transition-all">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button> --> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Tetris AI -->
+                    <div class="project-card glass rounded-2xl overflow-hidden group" data-category="ai">
+                        <div class="relative h-64 bg-gradient-to-br from-cyber-secondary/20 to-cyber-accent/20 flex items-center justify-center overflow-hidden">
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%237000ff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+                            <i class="fas fa-robot text-6xl text-cyber-secondary opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute top-4 right-4">
+                                <span class="px-3 py-1 rounded-full bg-cyber-secondary/20 text-cyber-secondary text-xs font-bold border border-cyber-secondary/30">
+                                    <i class="fas fa-brain mr-1"></i>AI/ML
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-cyber-secondary transition-colors">
+                                Tetris AI Agent
+                            </h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">
+                                Reinforcement learning agent trained to master Tetris using optimized strategy algorithms and heuristic search.
+                            </p>
+                            
+                            <!-- Tech Stack -->
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs border border-blue-500/30">Python</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-secondary/10 text-cyber-secondary text-xs border border-cyber-secondary/30">PyTorch</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-accent/10 text-cyber-accent text-xs border border-cyber-accent/30">RL</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-primary/10 text-cyber-primary text-xs border border-cyber-primary/30">Heuristics</span>
+                            </div>
+
+                            <!-- Features -->
+                            <ul class="feature-list space-y-2 text-sm text-gray-400 mb-6">
+                                <li>Reinforcement learning agent with optimized strategy</li>
+                                <li>Heuristics and search-based algorithms for move selection</li>
+                                <li>Reward shaping and iterative training enhancement</li>
+                                <li>Complex environment decision-making demonstration</li>
+                            </ul>
+
+                            <div class="flex gap-4">
+                                <button class="flex-1 py-3 rounded-lg bg-cyber-secondary/10 border border-cyber-secondary/30 text-cyber-secondary font-medium hover:bg-cyber-secondary hover:text-white transition-all flex items-center justify-center gap-2 group/btn">
+                                    <i class="fab fa-github"></i>
+                                    <span>View Code</span>
+                                    <i class="fas fa-arrow-right opacity-0 group-hover/btn:opacity-100 transition-opacity"></i>
+                                </button>
+                                <button class="px-4 py-3 rounded-lg border border-gray-700 text-gray-400 hover:border-cyber-secondary hover:text-cyber-secondary transition-all">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Disease Prediction -->
+                    <div class="project-card glass rounded-2xl overflow-hidden group" data-category="ai">
+                        <div class="relative h-64 bg-gradient-to-br from-cyber-warning/20 to-cyber-success/20 flex items-center justify-center overflow-hidden">
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffb800\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+                            <i class="fas fa-heartbeat text-6xl text-cyber-warning opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute top-4 right-4">
+                                <span class="px-3 py-1 rounded-full bg-cyber-warning/20 text-cyber-warning text-xs font-bold border border-cyber-warning/30">
+                                    <i class="fas fa-brain mr-1"></i>AI/ML
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-cyber-warning transition-colors">
+                                Disease Prediction System
+                            </h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">
+                                Machine learning classifier for early disease detection using structured health datasets and advanced preprocessing.
+                            </p>
+                            
+                            <!-- Tech Stack -->
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs border border-orange-500/30">Python</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-warning/10 text-cyber-warning text-xs border border-cyber-warning/30">Scikit-learn</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-success/10 text-cyber-success text-xs border border-cyber-success/30">Pandas</span>
+                                <span class="tech-tag px-3 py-1 rounded-full bg-cyber-primary/10 text-cyber-primary text-xs border border-cyber-primary/30">NumPy</span>
+                            </div>
+
+                            <!-- Features -->
+                            <ul class="feature-list space-y-2 text-sm text-gray-400 mb-6">
+                                <li>ML classifier for disease prediction from health data</li>
+                                <li>Scikit-learn for training, evaluation, and preprocessing</li>
+                                <li>Feature engineering and normalization techniques</li>
+                                <li>Reliable accuracy with comprehensive metric reporting</li>
+                            </ul>
+
+                            <div class="flex gap-4">
+                                <button class="flex-1 py-3 rounded-lg bg-cyber-warning/10 border border-cyber-warning/30 text-cyber-warning font-medium hover:bg-cyber-warning hover:text-cyber-dark transition-all flex items-center justify-center gap-2 group/btn">
+                                    <i class="fab fa-github"></i>
+                                    <span>View Code</span>
+                                    <i class="fas fa-arrow-right opacity-0 group-hover/btn:opacity-100 transition-opacity"></i>
+                                </button>
+                                <button class="px-4 py-3 rounded-lg border border-gray-700 text-gray-400 hover:border-cyber-warning hover:text-cyber-warning transition-all">
+                                    <i class="fas fa-chart-line"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Gesture Wheelchair -->
+                    <div class="project-card glass rounded-2xl overflow-hidden group lg:col-span-2" data-category="hardware">
+                        <div class="grid md:grid-cols-2">
+                            <div class="relative h-64 md:h-full bg-gradient-to-br from-cyber-accent/20 to-cyber-primary/20 flex items-center justify-center overflow-hidden min-h-[300px]">
+                                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ff003c\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+                                <i class="fas fa-wheelchair text-8xl text-cyber-accent opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                                <div class="absolute top-4 right-4">
+                                    <span class="px-3 py-1 rounded-full bg-cyber-accent/20 text-cyber-accent text-xs font-bold border border-cyber-accent/30">
+                                        <i class="fas fa-microchip mr-1"></i>HARDWARE
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-8 flex flex-col justify-center">
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-cyber-accent transition-colors">
+                                    Head Gesture Controlled Wheelchair
+                                </h3>
+                                <p class="text-gray-400 mb-6 leading-relaxed">
+                                    Innovative assistive device designed to improve mobility for individuals with physical disabilities, particularly those with limited hand or arm movement. The system translates head gestures into directional commands using sensor fusion and embedded systems.
+                                </p>
+                                
+                                <!-- Tech Stack -->
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="tech-tag px-3 py-1 rounded-full bg-cyber-accent/10 text-cyber-accent text-xs border border-cyber-accent/30">Arduino</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full bg-cyber-primary/10 text-cyber-primary text-xs border border-cyber-primary/30">IMU Sensors</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full bg-cyber-secondary/10 text-cyber-secondary text-xs border border-cyber-secondary/30">C++</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full bg-cyber-success/10 text-cyber-success text-xs border border-cyber-success/30">Motor Control</span>
+                                    <span class="tech-tag px-3 py-1 rounded-full bg-cyber-warning/10 text-cyber-warning text-xs border border-cyber-warning/30">Signal Processing</span>
+                                </div>
+
+                                <!-- Features -->
+                                <ul class="feature-list space-y-2 text-sm text-gray-400 mb-6">
+                                    <li>Assistive device for individuals with quadriplegia and limited mobility</li>
+                                    <li>Head gesture recognition using IMU sensors and signal processing</li>
+                                    <li>Real-time directional command translation to wheelchair motors</li>
+                                    <li>Hands-free control system promoting independence and accessibility</li>
+                                </ul>
+
+                                <div class="flex gap-4">
+                                    <button class="flex-1 py-3 rounded-lg bg-cyber-accent/10 border border-cyber-accent/30 text-cyber-accent font-medium hover:bg-cyber-accent hover:text-white transition-all flex items-center justify-center gap-2 group/btn">
+                                        <i class="fab fa-github"></i>
+                                        <span>View Code</span>
+                                        <i class="fas fa-arrow-right opacity-0 group-hover/btn:opacity-100 transition-opacity"></i>
+                                    </button>
+                                    <button class="px-4 py-3 rounded-lg border border-gray-700 text-gray-400 hover:border-cyber-accent hover:text-cyber-accent transition-all">
+                                        <i class="fas fa-video"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- GitHub CTA -->
+                <div class="mt-16 text-center">
+                    <div class="glass inline-flex items-center gap-4 px-8 py-6 rounded-2xl border border-cyber-primary/20 hover:border-cyber-primary/50 transition-all group cursor-pointer" onclick="window.open('https://github.com/MeedooXS?tab=repositories', '_blank')">
+                        <div class="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-white font-bold text-lg group-hover:text-cyber-primary transition-colors">Explore More on GitHub</p>
+                            <p class="text-gray-400 text-sm">View all repositories and contributions</p>
+                        </div>
+                        <div class="flex -space-x-2 ml-4">
+                            <div class="w-8 h-8 rounded-full bg-cyber-primary/20 border-2 border-cyber-dark flex items-center justify-center text-xs text-cyber-primary">Py</div>
+                            <div class="w-8 h-8 rounded-full bg-cyber-secondary/20 border-2 border-cyber-dark flex items-center justify-center text-xs text-cyber-secondary">JS</div>
+                            <div class="w-8 h-8 rounded-full bg-cyber-success/20 border-2 border-cyber-dark flex items-center justify-center text-xs text-cyber-success">C++</div>
+                        </div>
+                        <i class="fas fa-arrow-right text-cyber-primary group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Preview Section -->
+        <section class="py-20 bg-cyber-surface/30 border-y border-cyber-primary/10">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white mb-4">Clean, Efficient <span class="text-gradient">Code</span></h2>
+                    <p class="text-gray-400">Example implementation from the Password Manager project</p>
+                </div>
+
+                <div class="max-w-3xl mx-auto code-window shadow-2xl shadow-cyber-primary/10">
+                    <div class="code-header">
+                        <div class="code-dot bg-red-500"></div>
+                        <div class="code-dot bg-yellow-500"></div>
+                        <div class="code-dot bg-green-500"></div>
+                        <span class="ml-4 text-gray-400 text-sm">secure_vault.py</span>
+                    </div>
+                    <div class="code-content overflow-x-auto">
+                        <pre><code><span class="code-keyword">from</span> cryptography.fernet <span class="code-keyword">import</span> Fernet
+<span class="code-keyword">from</span> cryptography.hazmat.primitives <span class="code-keyword">import</span> hashes
+<span class="code-keyword">from</span> cryptography.hazmat.primitives.kdf.pbkdf2 <span class="code-keyword">import</span> PBKDF2HMAC
+
+<span class="code-keyword">class</span> <span class="code-function">SecureVault</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, master_password):
+        self.kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=os.urandom(16),
+            iterations=480000,
+        )
+        self.key = base64.urlsafe_b64encode(
+            self.kdf.derive(master_password.encode())
+        )
+        self.cipher = Fernet(self.key)
+    
+    <span class="code-keyword">def</span> <span class="code-function">encrypt_password</span>(self, password):
+        <span class="code-keyword">return</span> self.cipher.encrypt(password.encode())</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     <!-- Acknowledgment -->
+        <section class="py-20 relative">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="glass rounded-2xl p-8 md:p-12 border border-cyber-primary/20 relative overflow-hidden">
+                    <!-- Decorative Elements -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-cyber-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    
+                    <div class="relative z-10 text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white text-2xl mx-auto mb-6 animate-float">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        
+                        <h2 class="text-3xl font-bold text-white mb-6">Acknowledgment</h2>
+                        
+                        <p class="text-gray-300 leading-relaxed mb-6 text-lg">
+                            These Projects were made possible through the <span class="text-cyber-primary font-semibold">collaboration</span>, <span class="text-cyber-secondary font-semibold">support</span>, and <span class="text-cyber-success font-semibold">dedication</span> of my team. Their expertise, critical insights, and commitment to scientific integrity played a vital role in refining these ideas and transforming them into practical, measurable outcomes.
+                        </p>
+                        
+                        <div class="glass rounded-xl p-6 bg-cyber-surface/50 border-l-4 border-cyber-gold">
+                            <p class="text-white italic text-lg">
+                                "I Don't Pick a Winning Team , They Win Because I chose them."
+                            </p>
+                        </div>
+
+                        <div class="mt-8 flex justify-center gap-4">
+                            <div class="flex items-center gap-2 text-gray-400 text-sm">
+                                <i class="fas fa-check-circle text-cyber-success"></i>
+                                <span>Collaborative Excellence</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-400 text-sm">
+                                <i class="fas fa-check-circle text-cyber-success"></i>
+                                <span>Scientific Integrity</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-400 text-sm">
+                                <i class="fas fa-check-circle text-cyber-success"></i>
+                                <span>Shared Success</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-cyber-primary/20 bg-cyber-surface/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold">
+                            AE
+                        </div>
+                        <span class="text-white font-bold text-xl">Ahmed Elbialy</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md">
+                        SOC Analyst & Full Stack Developer dedicated to building secure, scalable, and intelligent systems.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-cyber-primary transition-colors">About</a></li>
+                        <li><a href="certificates.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="https://www.linkedin.com/in/ahmed-elbialy-3b155a2b8/" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.facebook.com/Meedoo.XS3" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/ahmedisstory?s=21" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://github.com/MeedooXS" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-cyber-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm font-mono">
+                    <span class="text-cyber-primary">&copy;</span> 2024 Ahmed Elbialy. All systems secure.
+                </p>
+                <p class="text-gray-600 text-xs font-mono">
+                    Last updated: <span id="last-updated"></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Remove loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        gsap.to(card, {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.4,
+                            display: 'block'
+                        });
+                    } else {
+                        gsap.to(card, {
+                            opacity: 0,
+                            scale: 0.8,
+                            duration: 0.4,
+                            onComplete: () => {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate project cards
+        gsap.utils.toArray('.project-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.6,
+                delay: i * 0.15,
+                ease: 'power3.out'
+            });
+        });
+
+        // Animate code window
+        gsap.from('.code-window', {
+            scrollTrigger: {
+                trigger: '.code-window',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: 'power3.out'
+        });
+
+        // Particle Background
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        const particleCount = 25;
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resize);
+        resize();
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.size = Math.random() * 2 + 1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            
+            draw() {
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        init();
+        animate();
+
+        // Last updated date
+        document.getElementById('last-updated').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                navbar.classList.add('shadow-lg', 'shadow-cyber-primary/10');
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-cyber-primary/10');
+            }
+        });
+    </script>
+</body>
+</html>

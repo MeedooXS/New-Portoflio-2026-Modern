@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Ahmed Elbialy - SOC Analyst & Full Stack Developer. Get in touch for collaborations, security consultations, or project inquiries.">
+    <meta name="keywords" content="Contact, Ahmed Elbialy, Cybersecurity, Collaboration, Hire">
+    <meta property="og:title" content="Contact | Ahmed Elbialy">
+    <meta property="og:description" content="Get in touch for cybersecurity consulting, full-stack development, or research collaboration.">
+    
+    <title>Contact | Ahmed Elbialy - Let's Connect</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#0a0a0f',
+                            darker: '#050508',
+                            primary: '#00f0ff',
+                            secondary: '#7000ff',
+                            accent: '#ff003c',
+                            success: '#00ff88',
+                            surface: '#13131f',
+                            warning: '#ffb800',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'typing': 'typing 2s steps(20) infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        typing: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 4px; }
+        
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .glass {
+            background: rgba(19, 19, 31, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #00f0ff, #7000ff);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .terminal-window {
+            background: #0d1117;
+            border-radius: 12px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .terminal-header {
+            background: #161b22;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-body {
+            padding: 24px;
+            color: #e6edf3;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #e6edf3;
+            font-family: 'JetBrains Mono', monospace;
+            width: 100%;
+            outline: none;
+        }
+        
+        .terminal-input::placeholder {
+            color: #6e7681;
+        }
+        
+        .form-field {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .form-field label {
+            display: block;
+            color: #7d8590;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 12px 16px;
+            color: #e6edf3;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-field input:focus,
+        .form-field textarea:focus {
+            border-color: #00f0ff;
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #00f0ff, #7000ff);
+            color: #0a0a0f;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.5);
+        }
+        
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+        
+        .submit-btn:hover::after {
+            animation: shimmer 0.5s ease-in-out;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) rotate(45deg); opacity: 0; }
+        }
+        
+        .social-card {
+            transition: all 0.3s ease;
+        }
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: currentColor;
+        }
+        
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0f;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-cyber-dark text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="text-cyber-primary font-mono text-xl animate-pulse">
+            <i class="fas fa-satellite-dish mr-2"></i>Establishing Connection...
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0 opacity-50"></div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold text-lg group-hover:shadow-lg group-hover:shadow-cyber-primary/50 transition-all">
+                        AE
+                    </div>
+                    <span class="text-white font-bold text-xl tracking-tight group-hover:text-cyber-primary transition-colors">
+                        Ahmed<span class="text-cyber-primary">.Elbialy</span>
+                    </span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">About</a>
+                    <a href="certificates.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Projects</a>
+                    <a href="researches.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-cyber-primary">Contact</a>
+                    <a href="cv.html" class="px-4 py-2 rounded-full bg-gradient-to-r from-cyber-primary to-cyber-secondary text-cyber-dark font-bold text-sm hover:shadow-lg hover:shadow-cyber-primary/50 transition-all transform hover:scale-105">
+                        CV
+                    </a>
+                </nav>
+
+                <button class="md:hidden text-white text-2xl" id="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="hidden md:hidden mt-4 pb-4 border-t border-cyber-primary/20 pt-4" id="mobile-menu">
+                <div class="flex flex-col gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-400 hover:text-cyber-primary transition-colors">About</a>
+                    <a href="certificates.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Projects</a>
+                    <a href="researches.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="text-cyber-primary font-medium">Contact</a>
+                    <a href="cv.html" class="text-cyber-primary font-medium">View CV</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24">
+        
+        <!-- Hero Section -->
+        <section class="relative py-20 overflow-hidden">
+            <div class="absolute top-20 right-10 w-72 h-72 bg-cyber-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-20 left-10 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+            <div class="container mx-auto px-6 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-surface border border-cyber-primary/30 mb-6">
+                    <i class="fas fa-signal text-cyber-primary text-sm animate-pulse"></i>
+                    <span class="text-xs font-mono text-cyber-primary">CONNECTION_OPEN</span>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                    Let's <span class="text-gradient">Connect</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed mb-12">
+                    Have a project in mind, security concern, or research opportunity? 
+                    I'm always open to discussing <span class="text-cyber-primary">new projects</span>, 
+                    <span class="text-cyber-secondary">creative ideas</span>, or 
+                    <span class="text-cyber-success">opportunities</span> to be part of your visions.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="py-20 relative">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
+                    
+                    <!-- Contact Info & Social -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <div>
+                            <h2 class="text-2xl font-bold text-white mb-6">Contact Information</h2>
+                            <p class="text-gray-400 leading-relaxed mb-6">
+                                Feel free to reach out through any of these channels. I typically respond within 24-48 hours.
+                            </p>
+                        </div>
+
+                        <!-- Email Card -->
+                        <a href="mailto:ahmed2003.ae10@gmail.com" class="block glass rounded-xl p-6 border border-cyber-primary/20 hover:border-cyber-primary/50 transition-all group social-card">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-cyber-primary/10 flex items-center justify-center text-cyber-primary group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 font-mono mb-1">PRIMARY_EMAIL</p>
+                                    <p class="text-white font-medium group-hover:text-cyber-primary transition-colors">ahmed2003.ae10@gmail.com</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Social Links Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="https://www.linkedin.com/in/ahmed-elbialy-3b155a2b8/" target="_blank" class="glass rounded-xl p-4 border border-cyber-secondary/20 hover:border-cyber-secondary/50 transition-all group social-card text-center">
+                                <i class="fab fa-linkedin text-2xl text-cyber-secondary mb-2 group-hover:scale-110 transition-transform inline-block"></i>
+                                <p class="text-xs text-gray-500 font-mono">LinkedIn</p>
+                            </a>
+                            
+                            <a href="https://github.com/MeedooXS" target="_blank" class="glass rounded-xl p-4 border border-gray-600 hover:border-white transition-all group social-card text-center">
+                                <i class="fab fa-github text-2xl text-gray-400 group-hover:text-white mb-2 group-hover:scale-110 transition-transform inline-block"></i>
+                                <p class="text-xs text-gray-500 font-mono">GitHub</p>
+                            </a>
+                            
+                            <a href="https://www.facebook.com/Meedoo.XS3" target="_blank" class="glass rounded-xl p-4 border border-blue-500/20 hover:border-blue-500/50 transition-all group social-card text-center">
+                                <i class="fab fa-facebook text-2xl text-blue-500 mb-2 group-hover:scale-110 transition-transform inline-block"></i>
+                                <p class="text-xs text-gray-500 font-mono">Facebook</p>
+                            </a>
+                            
+                            <a href="https://x.com/ahmedisstory?s=21" target="_blank" class="glass rounded-xl p-4 border border-cyber-primary/20 hover:border-cyber-primary/50 transition-all group social-card text-center">
+                                <i class="fab fa-twitter text-2xl text-cyber-primary mb-2 group-hover:scale-110 transition-transform inline-block"></i>
+                                <p class="text-xs text-gray-500 font-mono">Twitter</p>
+                            </a>
+                        </div>
+
+                        <!-- Availability Status -->
+                        <div class="glass rounded-xl p-6 border border-cyber-success/20">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="relative flex h-3 w-3">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-success opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-cyber-success"></span>
+                                </span>
+                                <span class="text-cyber-success font-mono text-sm font-bold">AVAILABLE_FOR_WORK</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Currently open to freelance projects, security consulting,Researches and Full-time opportunities. 
+                                Can't wait to discuss remote or on-site arrangements. Let's build something great together!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Terminal Contact Form -->
+                    <div class="lg:col-span-3">
+                        <div class="terminal-window">
+                            <div class="terminal-header">
+                                <div class="terminal-dot bg-red-500"></div>
+                                <div class="terminal-dot bg-yellow-500"></div>
+                                <div class="terminal-dot bg-green-500"></div>
+                                <span class="ml-4 text-gray-400 text-sm font-mono">contact_form.exe</span>
+                            </div>
+                            
+                            <div class="terminal-body">
+                                <div class="mb-6">
+                                    <p class="text-cyber-primary font-mono text-sm mb-2">
+                                        <span class="text-cyber-success">➜</span> <span class="text-cyber-secondary">~</span> ./initiate_contact.sh
+                                    </p>
+                                    <p class="text-gray-500 font-mono text-sm typing-effect">
+                                        Initializing secure transmission protocol...<span class="cursor-blink">_</span>
+                                    </p>
+                                </div>
+
+                                <form action="https://formsubmit.co/0735b6f79c6483ae8a09c4c29fc54ab5" method="POST" class="space-y-4">
+                                    <input type="hidden" name="_captcha" value="false">
+                                    <input type="hidden" name="_template" value="table">
+                                    <input type="hidden" name="_next" value="thanks.html">
+
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div class="form-field">
+                                            <label>
+                                                <span class="text-cyber-primary">$</span> first_name <span class="text-cyber-accent">*</span>
+                                            </label>
+                                            <input type="text" name="firstName" placeholder="Enter first name..." required>
+                                        </div>
+                                        
+                                        <div class="form-field">
+                                            <label>
+                                                <span class="text-cyber-primary">$</span> last_name <span class="text-cyber-accent">*</span>
+                                            </label>
+                                            <input type="text" name="lastName" placeholder="Enter last name..." required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-field">
+                                        <label>
+                                            <span class="text-cyber-primary">$</span> email_address <span class="text-cyber-accent">*</span>
+                                        </label>
+                                        <input type="email" name="email" placeholder="name@example.com" required>
+                                    </div>
+
+                                    <div class="form-field">
+                                        <label>
+                                            <span class="text-cyber-primary">$</span> subject <span class="text-cyber-accent">*</span>
+                                        </label>
+                                        <input type="text" name="subject" placeholder="What is this regarding?" required>
+                                    </div>
+
+                                    <div class="form-field">
+                                        <label>
+                                            <span class="text-cyber-primary">$</span> message <span class="text-cyber-accent">*</span>
+                                        </label>
+                                        <textarea name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                                    </div>
+
+                                    <div class="pt-4">
+                                        <button type="submit" class="submit-btn w-full flex items-center justify-center gap-2">
+                                            <i class="fas fa-paper-plane"></i>
+                                            <span>Transmit Message</span>
+                                        </button>
+                                    </div>
+
+                                    <p class="text-gray-600 text-xs font-mono mt-4 text-center">
+                                        <i class="fas fa-lock mr-1"></i>
+                                        Secured by FormSubmit encryption
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-20 bg-cyber-surface/30 border-y border-cyber-primary/10">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+                    <p class="text-gray-400">Quick answers to common inquiries</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="glass rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between text-white font-medium hover:bg-cyber-surface/50 transition-colors" onclick="toggleFaq(this)">
+                            <span>What type of projects do you specialize in?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                            I specialize in cybersecurity operations (SOC), threat detection systems, secure full-stack web development, AI/ML integration for security, and digital forensics tools. I also enjoy working on emerging tech like quantum cryptography and 6G networks.
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between text-white font-medium hover:bg-cyber-surface/50 transition-colors" onclick="toggleFaq(this)">
+                            <span>Are you available for freelance work?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                            Yes! I'm currently available for freelance security consulting, web development projects, and research collaborations. My schedule typically allows for 20-30 hours per week on freelance projects.
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between text-white font-medium hover:bg-cyber-surface/50 transition-colors" onclick="toggleFaq(this)">
+                            <span>How quickly do you respond to inquiries?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                            I typically respond to all inquiries within 24-72 hours. For urgent security matters, please indicate [URGENT] in the subject line for priority response.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-cyber-primary/20 bg-cyber-surface/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold">
+                            AE
+                        </div>
+                        <span class="text-white font-bold text-xl">Ahmed Elbialy</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md">
+                        SOC Analyst & Full Stack Developer dedicated to building secure, scalable, and intelligent systems.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-cyber-primary transition-colors">About</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Projects</a></li>
+                        <li><a href="researches.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Research</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="https://www.linkedin.com/in/ahmed-elbialy-3b155a2b8/" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.facebook.com/Meedoo.XS3" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/ahmedisstory?s=21" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-cyber-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm font-mono">
+                    <span class="text-cyber-primary">&copy;</span> 2024 Ahmed Elbialy. All systems secure.
+                </p>
+                <p class="text-gray-600 text-xs font-mono">
+                    Last updated: <span id="last-updated"></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Remove loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // FAQ Toggle
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate social cards
+        gsap.utils.toArray('.social-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 30,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Animate terminal
+        gsap.from('.terminal-window', {
+            scrollTrigger: {
+                trigger: '.terminal-window',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            x: 50,
+            duration: 0.8,
+            ease: 'power3.out'
+        });
+
+        // Particle Background
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        const particleCount = 25;
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resize);
+        resize();
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.size = Math.random() * 2 + 1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            
+            draw() {
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        init();
+        animate();
+
+        // Last updated date
+        document.getElementById('last-updated').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                navbar.classList.add('shadow-lg', 'shadow-cyber-primary/10');
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-cyber-primary/10');
+            }
+        });
+    </script>
+</body>
+</html>

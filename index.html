@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ahmed Elbialy - SOC Analyst & Full Stack Developer specializing in cybersecurity operations, threat analysis, and intelligent system design.">
+    <meta name="keywords" content="SOC Analyst, Cybersecurity, Full Stack Developer, Prompt Engineering, Threat Analysis">
+    <meta name="author" content="Ahmed Elbialy">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ahmed Elbialy | SOC Analyst & Full Stack Developer">
+    <meta property="og:description" content="Cybersecurity professional specializing in SOC operations, threat analysis, and full-stack development.">
+    <meta property="og:image" content="IMGS/IMG_1.jpeg">
+    <meta property="og:url" content="https://meedooxs.github.io/Ahmed.Elbialy/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ahmed Elbialy | SOC Analyst & Developer">
+    <meta name="twitter:description" content="Cybersecurity operations and full-stack development portfolio.">
+    
+    <title>Ahmed Elbialy | SOC Analyst & Full Stack Developer</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#0a0a0f',
+                            darker: '#050508',
+                            primary: '#00f0ff',
+                            secondary: '#7000ff',
+                            accent: '#ff003c',
+                            success: '#00ff88',
+                            surface: '#13131f',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 15px #00f0ff' },
+                            '100%': { boxShadow: '0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f0ff;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00c4cc;
+        }
+        
+        /* Grid Background */
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(19, 19, 31, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Terminal Cursor */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        /* Card Hover Effect */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.3);
+            border-color: rgba(0, 240, 255, 0.5);
+        }
+        
+        /* Image Hover Zoom */
+        .img-zoom {
+            overflow: hidden;
+        }
+        .img-zoom img {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Navigation Link Underline */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #00f0ff, #7000ff);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Particle Canvas */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0f;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loader-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00f0ff;
+            font-size: 1.5rem;
+            position: relative;
+        }
+        .loader-text::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #00f0ff;
+            animation: blink 1s step-end infinite;
+        }
+    </style>
+</head>
+<body class="bg-cyber-dark text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-text">Initializing Secure Connection...</div>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Grid Overlay -->
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0 opacity-50"></div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold text-lg group-hover:animate-glow transition-all">
+                        AE
+                    </div>
+                    <span class="text-white font-bold text-xl tracking-tight group-hover:text-cyber-primary transition-colors">
+                        Ahmed<span class="text-cyber-primary">.Elbialy</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-white hover:text-cyber-primary transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">About</a>
+                    <a href="certificates.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Projects</a>
+                    <a href="researches.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-gray-400 hover:text-cyber-primary transition-colors">Contact</a>
+                    <a href="cv.html" class="px-4 py-2 rounded-full bg-gradient-to-r from-cyber-primary to-cyber-secondary text-cyber-dark font-bold text-sm hover:shadow-lg hover:shadow-cyber-primary/50 transition-all transform hover:scale-105">
+                        CV
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white text-2xl" id="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav class="hidden md:hidden mt-4 pb-4 border-t border-cyber-primary/20 pt-4" id="mobile-menu">
+                <div class="flex flex-col gap-4">
+                    <a href="index.html" class="text-cyber-primary font-medium">Home</a>
+                    <a href="about.html" class="text-gray-400 hover:text-cyber-primary transition-colors">About</a>
+                    <a href="certificates.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a>
+                    <a href="projects.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Projects</a>
+                    <a href="researches.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Research</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Contact</a>
+                    <a href="cv.html" class="text-cyber-primary font-medium">View CV</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24">
+        
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-20 right-10 w-72 h-72 bg-cyber-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-20 left-10 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+            <div class="container mx-auto px-6 py-20">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Profile Image -->
+                    <div class="relative order-2 lg:order-1" id="profile-container">
+                        <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+                            <!-- Glowing Ring -->
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-cyber-primary to-cyber-secondary blur-xl opacity-50 animate-pulse-slow"></div>
+                            
+                            <!-- Image Container -->
+                            <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-cyber-surface shadow-2xl animate-float">
+                                <img src="IMGS/IMG_1.jpeg" alt="Ahmed Elbialy" class="w-full h-full object-cover">
+                                
+                                <!-- Overlay Badge -->
+                                <div class="absolute bottom-4 right-4 bg-cyber-success text-cyber-dark px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                                    <span class="w-2 h-2 bg-cyber-dark rounded-full animate-pulse"></span>
+                                    Available
+                                </div>
+                            </div>
+
+                            <!-- Floating Badges -->
+                            <div class="absolute -top-4 -left-4 bg-cyber-surface border border-cyber-primary/30 px-4 py-2 rounded-lg shadow-xl animate-float" style="animation-delay: 1s;">
+                                <i class="fas fa-shield-alt text-cyber-primary mr-2"></i>
+                                <span class="text-xs font-mono text-cyber-primary">SOC L1</span>
+                            </div>
+                            
+                            <div class="absolute -bottom-4 -left-4 bg-cyber-surface border border-cyber-secondary/30 px-4 py-2 rounded-lg shadow-xl animate-float" style="animation-delay: 2s;">
+                                <i class="fas fa-code text-cyber-secondary mr-2"></i>
+                                <span class="text-xs font-mono text-cyber-secondary">Full Stack</span>
+                            </div>
+                            
+                            <div class="absolute -bottom-4 -right-4 bg-cyber-surface border border-cyber-secondary/30 px-4 py-2 rounded-lg shadow-xl animate-float" style="animation-delay: 2s;">
+                                <i class="fas fa-code text-cyber-secondary mr-2"></i>
+                                <span class="text-xs font-mono text-cyber-secondary">Prompt Engineering</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="order-1 lg:order-2 text-center lg:text-left" id="hero-text">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-surface border border-cyber-primary/30 mb-6">
+                            <span class="w-2 h-2 bg-cyber-primary rounded-full animate-pulse"></span>
+                            <span class="text-xs font-mono text-cyber-primary">System Secure</span>
+                        </div>
+
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+                            Ahmed <span class="text-gradient">Elbialy</span>
+                        </h1>
+
+                        <div class="h-8 mb-6">
+                            <p class="text-xl md:text-2xl text-gray-400 font-mono" id="typewriter">
+                                <span class="text-cyber-primary">></span> <span id="type-text"></span><span class="cursor-blink text-cyber-primary">_</span>
+                            </p>
+                        </div>
+
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+                            Through hands-on skills in investigations, security operations, full-stack development, and continuous exploration in AI, I've built strong, multidimensional skills across cybersecurity. I lead teams, foster collaboration, and deliver robust security systems.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start mb-8">
+                            <a href="projects.html" class="group px-8 py-4 rounded-full bg-gradient-to-r from-cyber-primary to-cyber-secondary text-cyber-dark font-bold hover:shadow-lg hover:shadow-cyber-primary/50 transition-all transform hover:scale-105 flex items-center gap-2">
+                                View Projects
+                                <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <a href="contact.html" class="px-8 py-4 rounded-full border-2 border-cyber-primary/50 text-cyber-primary font-bold hover:bg-cyber-primary/10 transition-all flex items-center gap-2">
+                                <i class="fas fa-envelope"></i>
+                                Contact Me
+                            </a>
+                        </div>
+
+                        <!-- Tech Stack Pills -->
+                        <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+                            <span class="px-3 py-1 rounded-full bg-cyber-surface border border-gray-700 text-xs text-gray-400">SIEM</span>
+                            <span class="px-3 py-1 rounded-full bg-cyber-surface border border-gray-700 text-xs text-gray-400">Network Security</span>
+                            <span class="px-3 py-1 rounded-full bg-cyber-surface border border-gray-700 text-xs text-gray-400">Threat Hunting</span>
+                            <span class="px-3 py-1 rounded-full bg-cyber-surface border border-gray-700 text-xs text-gray-400">Python</span>
+                            <span class="px-3 py-1 rounded-full bg-cyber-surface border border-gray-700 text-xs text-gray-400">AI/ML</span>
+                            <span class="px-3 py-1 rounded-full bg-cyber-surface border border-gray-700 text-xs text-gray-400">React</span>
+                            <span class="px-3 py-1 rounded-full bg-cyber-surface border border-gray-700 text-xs text-gray-400">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <i class="fas fa-chevron-down text-cyber-primary text-2xl"></i>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="py-20 relative" id="stats-section">
+            <div class="container mx-auto px-6">
+                <div class="glass rounded-2xl p-8 md:p-12">
+                    <div class="grid md:grid-cols-3 gap-8 text-center">
+                        <div class="stat-item group">
+                            <div class="text-5xl md:text-6xl font-bold text-gradient mb-2 group-hover:scale-110 transition-transform inline-block" data-count="9">0</div>
+                            <div class="text-cyber-primary font-mono text-sm mb-1">CERTIFICATIONS</div>
+                            <div class="text-gray-500 text-sm">Professional & Academic</div>
+                        </div>
+                        
+                        <div class="stat-item group border-x-0 md:border-x border-cyber-primary/20">
+                            <div class="text-5xl md:text-6xl font-bold text-gradient mb-2 group-hover:scale-110 transition-transform inline-block" data-count="3">0</div>
+                            <div class="text-cyber-primary font-mono text-sm mb-1">YEARS EXPERIENCE</div>
+                            <div class="text-gray-500 text-sm">Security Operations | Academic</div>
+                        </div>
+                        
+                        <div class="stat-item group">
+                            <div class="text-5xl md:text-6xl font-bold text-gradient mb-2 group-hover:scale-110 transition-transform inline-block" data-count="3">0</div>
+                            <div class="text-cyber-primary font-mono text-sm mb-1">YEARS LEADERSHIP</div>
+                            <div class="text-gray-500 text-sm">Team Management</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="py-20 relative" id="achievements-section">
+            <div class="container mx-auto px-6">
+                <div class="flex items-center gap-4 mb-12">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center">
+                        <i class="fas fa-trophy text-cyber-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Recent Achievements</h2>
+                        <p class="text-gray-500 font-mono text-sm">MILESTONES_ACCOMPLISHED</p>
+                    </div>
+                </div>
+
+                
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Achievement Cards -->
+
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-cyber-secondary/20 transition-colors">
+                                <i class="fas fa-file-alt text-cyber-secondary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold mb-2 group-hover:text-cyber-secondary transition-colors">Roboleap Instructor</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">Joined Roboleap as an Instructor, delivering engaging technology and STEM education while helping students develop programming, problem-solving, and practical technical skills through hands-on learning.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-cyber-secondary/20 transition-colors">
+                                <i class="fas fa-file-alt text-cyber-secondary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold mb-2 group-hover:text-cyber-secondary transition-colors">ITC 2nd Research Publication</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">Published a research paper at the ITC Conference, building on my work in Chaos and contributing to the field of cybersecurity through advanced research, technical analysis, and innovative security solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-cyber-primary/20 transition-colors">
+                                <i class="fas fa-graduation-cap text-cyber-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold mb-2 group-hover:text-cyber-primary transition-colors">SOC Analyst Diploma</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">Successfully completed a comprehensive SOC Analyst Diploma, gaining hands-on experience in real-world security operations and incident response.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-cyber-secondary/20 transition-colors">
+                                <i class="fas fa-file-alt text-cyber-secondary text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold mb-2 group-hover:text-cyber-secondary transition-colors">IEEE Publication</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">Published scholarly paper on Quantum cryptography in 6G networks, analyzing quantum secure communication and AI-assisted key management.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-cyber-accent/20 transition-colors">
+                                <i class="fas fa-file-alt text-cyber-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold mb-2 group-hover:text-cyber-accent transition-colors">Digital Twin Research</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">Presented Digital Twin Cyber Attack Simulation model and introduced 300 roadmap with innovative features not yet seen in the market.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 hover-card group">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-success/10 flex items-center justify-center flex-shrink-0 group-hover:bg-cyber-success/20 transition-colors">
+                                <i class="fas fa-brain text-cyber-success text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold mb-2 group-hover:text-cyber-success transition-colors">AI Security Expertise</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">Expanded expertise in AI for cybersecurity, including anomaly detection and intelligent log analysis systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Participation Gallery -->
+        <section class="py-20 relative" id="participation-section">
+            <div class="container mx-auto px-6">
+                <div class="flex items-center gap-4 mb-12">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-surface border border-cyber-secondary/30 flex items-center justify-center">
+                        <i class="fas fa-camera text-cyber-secondary text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Participation & Engagement</h2>
+                        <p class="text-gray-500 font-mono text-sm">EVENTS_CONFERENCES_WORKSHOPS</p>
+                    </div>
+                </div>
+
+                <!-- Masonry Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
+                    <div class="img-zoom rounded-xl overflow-hidden row-span-2 group relative">
+                        <img src="IMGS/IMG_5554.JPG" alt="Participation 1" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Team Leader in ITC IEEE at Egyptian Military Academy</span>
+                        </div>
+                    </div>
+
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_6666.jpg" alt="Participation 2" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">After Discussion of the research with Dr Ali Tag Eldien Head of Cybersecurity Department - Delta University and Dr Hanaa Dean of Aritfical Intelligence - Delta University</span>
+                        </div>
+                    </div>
+
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_0599.jpg" alt="Participation 2" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">A picture with Dr Khaled Foad Dean of Computer Science and My Fellow Engineers Nada Elbanna and Mohamed.</span>
+                        </div>
+                    </div>
+
+                    <div class="img-zoom rounded-xl overflow-hidden row-span-2 group relative">
+                        <img src="IMGS/IMG_1234.jpg" alt="Participation 1" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">A picture with Dr Khaled Foad Dean of Computer Science and Dr Omar El Zeki</span>
+                        </div>
+                    </div>
+
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_2133.jpg" alt="Participation 2" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">While Discussing the Importance of Chaotic Cryptography and Quantum Systems</span>
+                        </div>
+                    </div>
+
+                    <div class="img-zoom rounded-xl overflow-hidden row-span-2 group relative">
+                        <img src="IMGS/IMG_3679.JPG" alt="Participation 1" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Exclusive Picture in Galala IEEE Conference 2025 with Eng. Ingy Ghanem</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_4670.JPG" alt="Participation 2" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">While Discussing the Importance of AI and Machine Learning in Cryptography and 6G networks</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden row-span-2 group relative">
+                        <img src="IMGS/IMG_4756.jpg" alt="Participation 3" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Team Leadership in Galala IEEE Conference 2025</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_3655.JPG" alt="Participation 4" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Galala IEEE Conference 2025 Team Picture with Assciate Professor Ibrahim Attiya and Eng. Ingy Ghanem</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden row-span-2 group relative">
+                        <img src="IMGS/IMG_3642.jpg" alt="Participation 5" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Keynote Presentation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_0259.jpg" alt="Participation 6" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Networking Event</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_3629.JPG" alt="Participation 7" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">IEEE Conference 2025 Teams Picture</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_9999.JPG" alt="Participation 9" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Database project proposing a new way to manage data of the students and collect there absense too.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_5171.JPG" alt="Participation 10" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Discussing the technical aspects of the project with the university president and faculty members including previous Minsiter of Education.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="img-zoom rounded-xl overflow-hidden group relative">
+                        <img src="IMGS/IMG_7147.jpg" alt="Participation 11" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-sm font-medium">Electric measurement group where we designed a wheel chair with a special motor that can be controlled by the user's brain signals.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-cyber-primary/10 to-cyber-secondary/10"></div>
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Secure Your Systems?</h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Let's collaborate on building robust security infrastructures and innovative solutions.</p>
+                <a href="contact.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-cyber-dark font-bold hover:bg-cyber-primary transition-colors">
+                    <i class="fas fa-rocket"></i>
+                    Start a Project
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-cyber-primary/20 bg-cyber-surface/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white font-bold">
+                            AE
+                        </div>
+                        <span class="text-white font-bold text-xl">Ahmed Elbialy</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md">
+                        SOC Analyst & Full Stack Developer dedicated to building secure, scalable, and intelligent systems.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="text-gray-400 hover:text-cyber-primary transition-colors">About</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Projects</a></li>
+                        <li><a href="certificates.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Certificates</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-cyber-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="https://www.linkedin.com/in/ahmed-elbialy-3b155a2b8/" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.facebook.com/Meedoo.XS3" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/ahmedisstory?s=21" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/meedoo_xs/" class="w-10 h-10 rounded-full bg-cyber-surface border border-cyber-primary/30 flex items-center justify-center text-gray-400 hover:text-cyber-primary hover:border-cyber-primary transition-all" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-cyber-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm font-mono">
+                    <span class="text-cyber-primary">&copy;</span> 2026 Ahmed Elbialy. All systems secure.
+                </p>
+                <p class="text-gray-600 text-xs font-mono">
+                    Last updated: <span id="last-updated"></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Remove loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Typewriter effect
+        const roles = ['SOC Analyst', 'Full Stack Developer', 'Prompt Engineer', 'Threat Hunter', 'Security Researcher', 'Incident Responder'];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeText = document.getElementById('type-text');
+
+        function typeWriter() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typeText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeText.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        // Start typewriter
+        setTimeout(typeWriter, 1000);
+
+        // Animated counters
+        const statsSection = document.getElementById('stats-section');
+        const counters = document.querySelectorAll('[data-count]');
+        let animated = false;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.ceil(current) + '+';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+
+                updateCounter();
+            });
+        };
+
+        // Intersection Observer for counters
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animated) {
+                    animateCounters();
+                    animated = true;
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(statsSection);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from('#profile-container', {
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            delay: 1.5,
+            ease: 'power3.out'
+        });
+
+        gsap.from('#hero-text > *', {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2,
+            delay: 1.5,
+            ease: 'power3.out'
+        });
+
+        // Achievement cards
+        gsap.utils.toArray('.hover-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Gallery items
+        gsap.utils.toArray('.img-zoom').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.5,
+                delay: i * 0.05,
+                ease: 'back.out(1.7)'
+            });
+        });
+
+        // Particle Network Background
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        const particleCount = 50;
+        const connectionDistance = 150;
+        const mouseDistance = 200;
+        
+        let mouse = { x: null, y: null };
+        
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+        
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resize);
+        resize();
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+                
+                // Mouse interaction
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 0.6;
+                        const directionY = forceDirectionY * force * 0.6;
+                        
+                        this.vx += directionX;
+                        this.vy += directionY;
+                    }
+                }
+            }
+            
+            draw() {
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.2 * (1 - distance / connectionDistance)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        init();
+        animate();
+
+        // Last updated date
+        document.getElementById('last-updated').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('shadow-lg', 'shadow-cyber-primary/10');
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-cyber-primary/10');
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
